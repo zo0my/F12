@@ -9,7 +9,6 @@
  * @author Oleksandr Hvizda <gvizda94@gmail.com>
  */
 
-
 /**1
  * имя пользователя
  * @type {string}
@@ -170,6 +169,7 @@ let randNumber = prompt('Введите число:')
 /**
  * сообщение, проверка четности
  */
-alert('Четное ли ваше число? ' + Boolean(randNumber % 2))
+alert('Четное ли ваше число? ' + Boolean((randNumber+1) % 2) + '!')
+
 
 
