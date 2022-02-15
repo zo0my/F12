@@ -11,13 +11,51 @@
 
 <div class="container">
     <div class="row mt-5">
+
         <div class="col-3"></div>
-        <div class="col-6">
+        <div class="col-6 row justify-content-end">
             <label class="mb-3" for="userInput">Введите {условие задачи}:</label>
-            <input type="text" class="form-control mb-3" id="userInput" value="123">
+            <input type="text" class="form-control mb-3" id="userInput" value="2022-02-15">
+            <label class="mb-3" for="userPerimeter">Введите периметр:</label>
+            <input type="text" class="form-control mb-3" id="userPerimeter" value="2022-02-15">
+            <button class="btn btn-secondary mb-3 " id="EUR">EUR</button>
+            <button class="btn btn-secondary mb-3" id="UAH">UAH</button>
+            <button class="btn btn-secondary mb-3" id="AZN">AZN</button>
+
             <button class="mb-3 btn btn-primary" id="userConfirm">Ok</button>
 
             <div id="outMessage" class="pb-3">123</div>
+
+            <label class="mb-3" for="outDate">Следующий день</label>
+            <input type="date" class="form-control mb-3" id="outDate" value="2023-02-15">
+
+
+            <h2>Вопросы</h2>
+            <button class="mb-3 btn btn-primary " id="testStart"></button>
+            <div class="row m-0 p-0" id="testBody">
+                <h3 id="testQuestion"></h3>
+                <div class="col-4 align-items-center " id="answer1Box">
+                    <input type="radio" name="testAnswer" id="answer0">
+                    <label for="answer0" id="answerLabel0">123</label>
+                </div>
+                <div class="col-4 align-items-center " id="answer2Box" style="">
+                    <input type="radio" name="testAnswer" id="answer1">
+                    <label for="answer1" id="answerLabel1">123</label>
+                </div>
+
+                <div class="col-4 align-items-center " id="answer3Box" style="">
+                    <input type="radio" name="testAnswer" id="answer2">
+                    <label for="answer2" id="answerLabel2">123</label>
+                </div>
+                <button class="mb-3 btn btn-primary " id="testNext"></button>
+
+
+
+            </div>
+            <div id="testEnd">
+            <h3 id="testResult"></h3>
+            <button class="mb-3 btn btn-primary " id="testAgane">Go agane?</button>
+        </div>
         </div>
     </div>
 </div>

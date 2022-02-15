@@ -3,10 +3,20 @@
  * [JSDocs]{@link https://jsdoc.app/about-block-inline-tags.html}
  * Условное ветвление: if, '?'
  *  https://learn.javascript.ru/ifelse
+ * Операторы сравнения
+ * https://learn.javascript.ru/comparison
  *
+ * Циклы while и for
+ * https://learn.javascript.ru/while-for
  *
+ * Function Expression
+ * https://learn.javascript.ru/function-expressions
  *
+ * Функции
+ * https://learn.javascript.ru/function-basics
  *
+ * Метод slice()
+ * https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Array/slice
  * ВВЕДЕНИЕ В JAVASCRIPT
  * @package 03_hw
  * @author Oleksandr Hvizda <gvizda94@gmail.com>
@@ -96,6 +106,173 @@
 // }
 
 
+// //6 Конвертор валют
+// function showExchange (rate, currency) {
+//     let userInput = document.getElementById('userInput').value
+//     document.getElementById('outMessage').innerText = userInput * rate + ' ' + currency
+// }
+// document.getElementById('EUR').onclick = function () {
+//     const EXCHANGE_EUR = 0.88
+//     showExchange(EXCHANGE_EUR, 'EUR')
+// }
+// document.getElementById('UAH').onclick = function () {
+//     const EXCHANGE_UAH = 28.18
+//     showExchange(EXCHANGE_UAH, 'UAH')
+// }
+// document.getElementById('AZN').onclick = function () {
+//     const EXCHANGE_AZN = 1.70
+//     showExchange(EXCHANGE_AZN, 'AZN')
+// }
+
+// //7 Скидка >= 200=3% >= 300=5% >=500=7%
+// document.getElementById('userConfirm').onclick = function () {
+//     let userInput = document.getElementById('userInput').value
+//     let finalPrice = (userInput>=500) ? Math.round(userInput * 93)/100:
+//         (userInput>=300) ? Math.round(userInput * 95)/100 :
+//         (userInput>=200) ? Math.round(userInput * 97)/100 :
+//         userInput
+//     document.getElementById('outMessage').innerText = finalPrice
+// }
+
+// //8 Может ли окружность поместится в квадрат (длина окружности, периметр)
+// document.getElementById('userConfirm').onclick = function () {
+//     let userCircleDistance = document.getElementById('userInput').value
+//     let userPerimeter = document.getElementById('userPerimeter').value
+//     let userCircleDiameter = userCircleDistance/Math.PI
+//     let userSquareL = userPerimeter / 4
+//
+//     if ( userCircleDiameter > userSquareL)
+//         document.getElementById('outMessage').innerText = 'Не поместится окружность в квадрат'
+//     else
+//         document.getElementById('outMessage').innerText = 'Поместится окружность в квадрат'
+//
+// }
 
 
+//9. 3 вопроса, 3 варианта ответа, 2 балла за +, отобразить баллы
+function  hideElement(elementId) {
+    document.getElementById(elementId).style.display = "none"
+}
+function  renderElement(elementId)  {
+    document.getElementById(elementId).style.display = "flex"
+}
 
+hideElement('testBody')
+hideElement('testEnd')
+
+
+document.getElementById('testStart').onclick = function () {
+    hideElement('testStart')
+    renderElement('testBody')
+    let testData = {
+        question:['Редкая ... долетит до середины Днепра',
+        'Пустой тест2','Пустой тест3'],
+        answers:['Птица','Рыба','Мышь',
+            '2-1','2-2','2-3',
+            '3-1','3-2','3-3'],
+        rightAnswer: [2,1,0],
+        increment: 2,
+        total: 0
+    }
+
+    let testCounter = 0
+
+    function renderTestText(testCount) {
+        document.getElementById('testQuestion').innerText = testData.question[testCount]
+
+        document.getElementById('answerLabel0').innerText = testData.answers[testCount*3+0]
+        document.getElementById('answerLabel1').innerText = testData.answers[testCount*3+1]
+        document.getElementById('answerLabel2').innerText = testData.answers[testCount*3+2]
+    }
+    renderTestText(testCounter)
+
+    function isAnswer(testCount) {
+        let radio = document.getElementsByName('testAnswer')
+        document.getElementById('outMessage').innerText = String(radio.length)
+        document.getElementById('outMessage').innerText = String(radio[0].value)
+        document.getElementById('outMessage').innerText += String(radio[1].value)
+        document.getElementById('outMessage').innerText += String(radio[2].value)
+
+
+        for (let i = 0; i < radio.length; i++) {
+            if (radio[i].checked && i == testData.rightAnswer[testCount]) {
+                return true
+            }
+            else
+                return false
+
+        }
+
+    }
+
+
+    document.getElementById('testNext').onclick = function () {
+        if (isAnswer(testCounter)) {
+            testData.total+=testData.increment
+        }
+        if (testCounter===2) {
+            renderElement('testEnd')
+            hideElement('testBody')
+            document.getElementById('testResult').innerText = testData.total
+         }
+         else {
+            testCounter++
+            renderTestText(testCounter)
+            }
+    }
+
+
+    document.getElementById('testAgane').onclick = function () {
+        testCounter = 0
+        testData.total = 0
+        hideElement('testEnd')
+        renderElement('testBody')
+        renderTestText(testCounter)
+    }
+}
+
+
+// //10 Следующий день
+// function ifLeapYear(currYear) {
+//     return (currYear % 4 === 0 && currYear % 100 !== 0 || currYear % 400 === 0)
+// }
+//
+// function unFormatDate(date) {
+//     if (String(date)[0] === '0')
+//         return date.slice(-1)
+//     else
+//         return date
+// }
+// function formatDate(date) {
+//     if (String(date)[1] === undefined)
+//         return ('0'+date)
+//     else
+//         return date
+// }
+//
+// document.getElementById('userConfirm').onclick = function () {
+//     let userDate = document.getElementById('userInput').value
+//
+//     let dayInMonth = [31, 28, 31,30,31,30,31,31,30,31,30,31]
+//     let userYear = userDate.slice(0, 4)
+//     let userMonth = userDate.slice(5, 7)
+//     let userDay = userDate.slice(-2)
+//
+//     if (ifLeapYear(userYear)) dayInMonth = [31, 29, 31,30,31,30,31,31,30,31,30,31]
+//     userMonth = unFormatDate(userMonth)
+//     userDay = unFormatDate(userDay)
+//
+//     userDay=Number(userDay)+1
+//     while (userDay > dayInMonth[userMonth-1]) {
+//         userDay -=dayInMonth[userMonth-1]
+//         userMonth++
+//         while (userMonth > 12) {
+//             userMonth-=12
+//             userYear++
+//         }
+//     }
+//     userMonth = formatDate(userMonth)
+//     userDay = formatDate(userDay)
+//     //document.getElementById('outMessage').innerText = userYear + '-' + userMonth + '-' + userDay
+//     document.getElementById('outDate').value = userYear + '-' + userMonth + '-' + userDay
+// }
