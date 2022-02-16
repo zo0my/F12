@@ -179,30 +179,18 @@ document.getElementById('testStart').onclick = function () {
 
     function renderTestText(testCount) {
         document.getElementById('testQuestion').innerText = testData.question[testCount]
-
-        document.getElementById('answerLabel0').innerText = testData.answers[testCount*3+0]
-        document.getElementById('answerLabel1').innerText = testData.answers[testCount*3+1]
-        document.getElementById('answerLabel2').innerText = testData.answers[testCount*3+2]
+        for (let i = 0; i< 3; i++)
+            document.getElementById('answerLabel'+i).innerText = testData.answers[testCount*3+0]
     }
     renderTestText(testCounter)
 
     function isAnswer(testCount) {
         let radio = document.getElementsByName('testAnswer')
-        document.getElementById('outMessage').innerText = String(radio.length)
-        document.getElementById('outMessage').innerText = String(radio[0].value)
-        document.getElementById('outMessage').innerText += String(radio[1].value)
-        document.getElementById('outMessage').innerText += String(radio[2].value)
-
-
-        for (let i = 0; i < radio.length; i++) {
-            if (radio[i].checked && i == testData.rightAnswer[testCount]) {
-                return true
-            }
-            else
-                return false
-
-        }
-
+        let k = false
+        for (let i = 0; i < radio.length; i++)
+             if (radio[i].checked && i === testData.rightAnswer[testCount])
+                 k= true
+       return k
     }
 
 
