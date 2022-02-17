@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+</head>
+<body>
+
+<div class="container">
+    <div class="row mt-5">
+
+        <div class="col-3"></div>
+        <div class="col-6 row justify-content-end">
+            <h2>Вопросы</h2>
+            <button class="col-6 mb-3 p-3 btn btn-primary " id="testStart">Начать тест</button>
+
+            <div class="row m-0 p-0 justify-content-end" id="testBody">
+                <h3 id="testQuestion"></h3>
+
+                <div class="col-4 align-items-center d-flex">
+                    <input type="radio" name="testAnswer" id="answer0">
+                    <label for="answer0" id="answerLabel0" class="px-2"></label>
+                </div>
+                <div class="col-4 align-items-center d-flex">
+                    <input type="radio"  name="testAnswer" id="answer1">
+                    <label for="answer1" id="answerLabel1" class="px-2"></label>
+                </div>
+
+                <div class="col-4 align-items-center d-flex">
+                    <input type="radio" name="testAnswer" id="answer2">
+                    <label for="answer2" id="answerLabel2" class="px-2"></label>
+                </div>
+                <button class="col-6 my-3 btn btn-primary p-3" id="testNext">Следующий вопрос</button>
+
+
+
+            </div>
+            <div class="flex-column" id="testEnd">
+                <h3 id="testResult"></h3>
+                <button class="col-6 align-self-end p-3 mb-3 btn btn-primary " id="testAgain">Restart?</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    //9. 3 вопроса, 3 варианта ответа, 2 балла за +, отобразить баллы
+    function  hideElement(elementId) {
+        document.getElementById(elementId).style.display = "none"
+    }
+    function  renderElement(elementId)  {
+        document.getElementById(elementId).style.display = "flex"
+    }
+
+    hideElement('testBody')
+    hideElement('testEnd')
+
+
+    document.getElementById('testStart').onclick = function () {
+        hideElement('testStart')
+        renderElement('testBody')
+        let testData = {
+            questions:['Редкая ... долетит до середины Днепра',
+            'Пустой тест2',
+                'Пустой тест3'],
+            answers:['Птица','Рыба','Мышь',
+                '2-1','2-2','2-3',
+                '3-1','3-2','3-3'],
+            rightAnswer: [2,1,0],
+            increment: 2,
+            total: 0,
+        }
+        let currTest = 0
+        let radio = document.getElementsByName('testAnswer')
+
+        // отображает текущие testData.question testData.answers
+        function showTestText() {
+            document.getElementById('testQuestion').innerText = testData.questions[currTest]
+            for (let i = 0; i< 3; i++)
+                document.getElementById('answerLabel'+i).innerText = testData.answers[currTest*3+i]
+        }
+        showTestText()
+
+        // проверяет checked testData.rightAnswer
+        function isAnswer() {
+            let currRightAnswer = testData.rightAnswer[currTest]
+                 return radio[currRightAnswer].checked
+        }
+
+        // убирает checked
+        function unSelect() {
+                for (let i = 0; i < radio.length; i++)
+                        radio[i].checked = false
+                }
+
+        // переходит к следующему тесту
+        document.getElementById('testNext').onclick = function () {
+            // начслить баллы
+            if (isAnswer()) {
+                testData.total+=testData.increment
+            }
+
+            //  отобразить конец теста или перейти к следующему
+            if (currTest===testData.questions.length -1) {
+                hideElement('testBody')
+                renderElement('testEnd')
+                document.getElementById('testResult').innerText =
+                    'Ваш результат: '+testData.total
+             }
+             else {
+                currTest++
+                showTestText()
+                }
+            unSelect()
+        }
+
+        // начинает тест сначала
+        document.getElementById('testAgain').onclick = function () {
+            currTest = 0
+            testData.total = 0
+            hideElement('testEnd')
+            renderElement('testBody')
+            showTestText()
+        }
+    }
+</script>
+
+
+</body>
+</html>

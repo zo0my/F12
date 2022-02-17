@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+</head>
+<body>
+
+<div class="container">
+    <div class="row mt-5">
+
+        <div class="col-3"></div>
+        <div class="col-6 row justify-content-end">
+            <label class="mb-3" for="userInput">Сообщение, зависимо от введенного возраста:</label>
+            <input type="Number" class="form-control mb-3" id="userInput" placeholder="Введите Ваш возраст">
+
+            <button class="mb-3 btn btn-primary" id="userConfirm">Ok</button>
+
+            <div id="outMessage" class="pb-3">Здесь будет ответ</div>
+
+
+        </div>
+    </div>
+</div>
+
+
+<script>
+    //1 Сообщение, зависимо от введенного возраста
+    document.getElementById('userConfirm').onclick = function () {
+        let userInput = document.getElementById('userInput').value
+
+        if (userInput >= 60)
+            document.getElementById('outMessage').innerText = 'Вы пенсионер'
+        else if (userInput >= 18)
+            document.getElementById('outMessage').innerText = 'Вы взрослый'
+        else if (userInput >= 12)
+            document.getElementById('outMessage').innerText = 'Вы подросток'
+        else if (userInput >= 0)
+            document.getElementById('outMessage').innerText  = 'Вы ребенок'
+        else
+            document.getElementById('outMessage').innerText = 'Вы феномен'
+    }
+
+</script>
+</body>
+</html>

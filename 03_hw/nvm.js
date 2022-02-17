@@ -1,22 +1,14 @@
 /**
  * Практическое задание 3 JS
  * [JSDocs]{@link https://jsdoc.app/about-block-inline-tags.html}
- * Условное ветвление: if, '?'
- *  https://learn.javascript.ru/ifelse
- * Операторы сравнения
- * https://learn.javascript.ru/comparison
  *
- * Циклы while и for
- * https://learn.javascript.ru/while-for
+ * [Условное ветвление: if, '?'] {@link https://learn.javascript.ru/ifelse}
+ * [Операторы сравнения] {@link https://learn.javascript.ru/comparison}
+ * [Циклы while и for] {@link https://learn.javascript.ru/while-for}
+ * [Function Expression] {@link https://learn.javascript.ru/function-expressions}
+ * [Функции] {@link https://learn.javascript.ru/function-basics}
+ * [Метод slice()] {@link https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Array/slice}
  *
- * Function Expression
- * https://learn.javascript.ru/function-expressions
- *
- * Функции
- * https://learn.javascript.ru/function-basics
- *
- * Метод slice()
- * https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Array/slice
  * ВВЕДЕНИЕ В JAVASCRIPT
  * @package 03_hw
  * @author Oleksandr Hvizda <gvizda94@gmail.com>
@@ -49,8 +41,8 @@
 //             document.getElementById('outMessage').innerText = arrSymbols[i]
 // }
 
-
-
+//
+//
 // //3 Поиск одинаковых цифр
 // document.getElementById('userConfirm').onclick = function () {
 //     let userInput = document.getElementById('userInput').value
@@ -66,7 +58,7 @@
 //         }
 //     }
 //
-//     document.getElementById('outMessage').innerText = 'Одинаковых сиволов в строке:'
+//     document.getElementById('outMessage').innerText = 'Одинаковых символов в строке:'
 //     // проверка + вывод, были ли повторы
 //     for (let j= 0; j < arrCountDigits.length; j++) {
 //         if (arrCountDigits[j] >1 )
@@ -149,75 +141,84 @@
 // }
 
 
-//9. 3 вопроса, 3 варианта ответа, 2 балла за +, отобразить баллы
-function  hideElement(elementId) {
-    document.getElementById(elementId).style.display = "none"
-}
-function  renderElement(elementId)  {
-    document.getElementById(elementId).style.display = "flex"
-}
-
-hideElement('testBody')
-hideElement('testEnd')
-
-
-document.getElementById('testStart').onclick = function () {
-    hideElement('testStart')
-    renderElement('testBody')
-    let testData = {
-        question:['Редкая ... долетит до середины Днепра',
-        'Пустой тест2','Пустой тест3'],
-        answers:['Птица','Рыба','Мышь',
-            '2-1','2-2','2-3',
-            '3-1','3-2','3-3'],
-        rightAnswer: [2,1,0],
-        increment: 2,
-        total: 0
-    }
-
-    let testCounter = 0
-
-    function renderTestText(testCount) {
-        document.getElementById('testQuestion').innerText = testData.question[testCount]
-        for (let i = 0; i< 3; i++)
-            document.getElementById('answerLabel'+i).innerText = testData.answers[testCount*3+0]
-    }
-    renderTestText(testCounter)
-
-    function isAnswer(testCount) {
-        let radio = document.getElementsByName('testAnswer')
-        let k = false
-        for (let i = 0; i < radio.length; i++)
-             if (radio[i].checked && i === testData.rightAnswer[testCount])
-                 k= true
-       return k
-    }
-
-
-    document.getElementById('testNext').onclick = function () {
-        if (isAnswer(testCounter)) {
-            testData.total+=testData.increment
-        }
-        if (testCounter===2) {
-            renderElement('testEnd')
-            hideElement('testBody')
-            document.getElementById('testResult').innerText = testData.total
-         }
-         else {
-            testCounter++
-            renderTestText(testCounter)
-            }
-    }
-
-
-    document.getElementById('testAgane').onclick = function () {
-        testCounter = 0
-        testData.total = 0
-        hideElement('testEnd')
-        renderElement('testBody')
-        renderTestText(testCounter)
-    }
-}
+// //9. 3 вопроса, 3 варианта ответа, 2 балла за +, отобразить баллы
+// function  hideElement(elementId) {
+//     document.getElementById(elementId).style.display = "none"
+// }
+// function  renderElement(elementId)  {
+//     document.getElementById(elementId).style.display = "flex"
+// }
+//
+// hideElement('testBody')
+// hideElement('testEnd')
+//
+// document.getElementById('testStart').onclick = function () {
+//     hideElement('testStart')
+//     renderElement('testBody')
+//     let testData = {
+//         questions:['Редкая ... долетит до середины Днепра',
+//             'Пустой тест2',
+//             'Пустой тест3'],
+//         answers:['Птица','Рыба','Мышь',
+//             '2-1','2-2','2-3',
+//             '3-1','3-2','3-3'],
+//         rightAnswer: [2,1,0],
+//         increment: 2,
+//         total: 0,
+//     }
+//     let currTest = 0
+//     let radio = document.getElementsByName('testAnswer')
+//
+//     // отображает текущие testData.question testData.answers
+//     function showTestText() {
+//         document.getElementById('testQuestion').innerText = testData.questions[currTest]
+//         for (let i = 0; i< 3; i++)
+//             document.getElementById('answerLabel'+i).innerText = testData.answers[currTest*3+i]
+//     }
+//     showTestText()
+//
+//     // проверяет checked testData.rightAnswer
+//     function isAnswer() {
+//         let currRightAnswer = testData.rightAnswer[currTest]
+//         return radio[currRightAnswer].checked
+//     }
+//
+//     // убирает checked
+//     function unSelect() {
+//         for (let i = 0; i < radio.length; i++)
+//             radio[i].checked = false
+//     }
+//
+//     // переходит к следующему тесту
+//     document.getElementById('testNext').onclick = function () {
+//         // начслиль баллы
+//         if (isAnswer()) {
+//             testData.total+=testData.increment
+//         }
+//
+//         //  отобразить конец теста или перейти к следующему
+//         if (currTest===testData.questions.length -1) {
+//             hideElement('testBody')
+//             renderElement('testEnd')
+//             document.getElementById('testResult').innerText =
+//                 'Ваш результат: '+testData.total
+//         }
+//         else {
+//             currTest++
+//             showTestText()
+//         }
+//         unSelect()
+//     }
+//
+//     // начинает тест сначала
+//     document.getElementById('testAgain').onclick = function () {
+//         currTest = 0
+//         testData.total = 0
+//         hideElement('testEnd')
+//         renderElement('testBody')
+//         showTestText()
+//     }
+// }
 
 
 // //10 Следующий день
@@ -257,6 +258,8 @@ document.getElementById('testStart').onclick = function () {
 //         while (userMonth > 12) {
 //             userMonth-=12
 //             userYear++
+//             if (ifLeapYear(userYear)) dayInMonth = [31, 29, 31,30,31,30,31,31,30,31,30,31]
+//             else dayInMonth = [31, 28, 31,30,31,30,31,31,30,31,30,31]
 //         }
 //     }
 //     userMonth = formatDate(userMonth)

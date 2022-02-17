@@ -31,7 +31,8 @@
 
 
             <h2>Вопросы</h2>
-            <button class="mb-3 btn btn-primary " id="testStart"></button>
+            <div class="col6"></div>
+            <button class="col-6 mb-3 p-3 btn btn-primary " id="testStart">Начать тест</button>
             <div class="row m-0 p-0" id="testBody">
                 <h3 id="testQuestion"></h3>
                 <div class="col-4 align-items-center " id="answer1Box">
@@ -47,14 +48,16 @@
                     <input type="radio" name="testAnswer" id="answer2">
                     <label for="answer2" id="answerLabel2">123</label>
                 </div>
-                <button class="mb-3 btn btn-primary " id="testNext"></button>
+                <div class="col-6"></div>
+                <button class="col-6 my-3 btn btn-primary p-3" id="testNext">Следующий вопрос</button>
 
 
 
             </div>
-            <div id="testEnd">
+            <div class="flex-column" id="testEnd">
             <h3 id="testResult"></h3>
-            <button class="mb-3 btn btn-primary " id="testAgane">Go agane?</button>
+
+            <button class="col-6 align-self-end p-3 mb-3 btn btn-primary " id="testAgane">Go agane?</button>
         </div>
         </div>
     </div>
