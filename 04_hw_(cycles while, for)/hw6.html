@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<main>
+    <form id="formControl">
+        <h3>"Калькулятор" </h3>
+        <div id="calcBody">
+
+
+        </div>
+
+
+    </form>
+    <script>
+        let calcBody = document.getElementById('calcBody')
+        let elNumber1 = document.createElement('input')
+        elNumber1.type = 'number'
+        elNumber1.required = true
+        elNumber1.placeholder = 'введите число'
+        elNumber1.onchange = function () {
+            elBtnCalc.disabled = !isCalc()
+        }
+
+        let elNumber2 = document.createElement('input')
+        elNumber2.type = 'number'
+        elNumber2.required = true
+        elNumber2.placeholder = 'введите число'
+        elNumber2.onchange = function () {
+            elBtnCalc.disabled = !isCalc()
+        }
+
+        let elOperand = document.createElement('input')
+        elOperand.type = 'text'
+        elOperand.required = true
+        elOperand.placeholder = 'введите знак "+", "-", "*", "/"'
+        elOperand.maxLength = 1
+        elOperand.pattern = '[+-*/]{1}'
+        elOperand.onchange = function () {
+            elBtnCalc.disabled = !isCalc()
+        }
+
+
+        let elBtnCalc = document.createElement('input')
+        elBtnCalc.type = 'button'
+        elBtnCalc.value = 'Посчитать'
+        elBtnCalc.disabled = true
+        elBtnCalc.onclick = function () {
+            calcResult()
+            clearBody()
+            renderQuestion()
+        }
+
+        let elResult = document.createElement('div')
+
+
+        let elQuestion = document.createElement('div')
+        elQuestion.innerText = `Повторить?`
+
+        let elBtnRestart = document.createElement('input')
+        elBtnRestart.type = 'button'
+        elBtnRestart.value = `Да`
+        elBtnRestart.onclick = function () {
+            clearBody()
+            renderInput()
+        }
+
+        let elBtnQuit = document.createElement('input')
+        elBtnQuit.type = 'button'
+        elBtnQuit.value = `Нет`
+        elBtnQuit.onclick = function () {
+            clearBody()
+            calcBody.innerHTML = "OK"
+        }
+
+
+        function isCalc() {
+            return elNumber1.value !== '' && elNumber2.value !== '' && elOperand.value !== ''
+        }
+
+        function renderInput() {
+            calcBody.appendChild(elNumber1)
+            calcBody.appendChild(elNumber2)
+            calcBody.appendChild(document.createElement('br'))
+            calcBody.appendChild(elOperand)
+            calcBody.appendChild(elBtnCalc)
+
+        }
+
+        function clearBody() {
+            calcBody.innerHTML = ''
+        }
+
+
+        function renderQuestion() {
+            calcBody.appendChild(elResult)
+            calcBody.appendChild(elQuestion)
+            calcBody.appendChild(document.createElement('br'))
+            calcBody.appendChild(elBtnRestart)
+            calcBody.appendChild(elBtnQuit)
+
+        }
+
+        function calcResult() {
+            elResult.innerHTML = `Результат: ${elNumber1.value} ${elOperand.value} ${elNumber2.value} = `
+            switch (elOperand.value) {
+                case '*':
+                    elResult.innerHTML += parseFloat(elNumber1.value) * parseFloat(elNumber2.value)
+                    break
+                case '+':
+                    elResult.innerHTML += parseFloat(elNumber1.value) + parseFloat(elNumber2.value)
+                    break
+                case '-':
+                    elResult.innerHTML += parseFloat(elNumber1.value) - parseFloat(elNumber2.value)
+                    break
+                case '/':
+                    elResult.innerHTML += parseFloat(elNumber1.value) / parseFloat(elNumber2.value)
+                    break
+                default :
+                    elResult.innerHTML += 'это не мат. операция'
+                    break
+            }
+
+        }
+
+
+        renderInput()
+
+
+    </script>
+
+
+</main>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<main>
+    <h3>Вывести таблицу умножения</h3>
+    <ul id="multiplicationTable"></ul>
+
+</main>
+
+<script>
+    let multTable = document.getElementById('multiplicationTable')
+    multTable.style.display = 'flex'
+    multTable.style.listStyleType = "none"
+
+
+    //хмммм, так не очень удобно
+    for (let i = 2; i < 10; i++) {
+        multTable.appendChild(document.createElement('li')).id = `multNum${i}`
+        document.getElementById(`multNum${i}`).appendChild(document.createElement('ul')).id = `multNumHere${i}`
+
+        for (let j = 1; j < 11; j++) {
+            document.getElementById(`multNumHere${i}`).appendChild(document.createElement('li')).id = `el${i}${j}`
+            document.getElementById(`el${i}${j}`).innerText += i * j
+
+        }
+    }
+
+</script>
+</body>
+</html>

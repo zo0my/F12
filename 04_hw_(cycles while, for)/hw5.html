@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<main>
+    <form id="form-control">
+        <h3>Положительные отрицательные, нули</h3>
+        <label for="userNumber">Введите число</label>
+        <input type="number" id="userNumber" value="0" required>
+        <input type="button" value="Следующее число" id="btnNext">
+
+    </form>
+
+</main>
+<script>
+    let numberData = {
+        count: 0,
+        negative: 0,
+        positive: 0,
+        zero: 0
+    }
+
+    function showResult() {
+        let elResult = document.createElement('div')
+        document.getElementById('form-control').appendChild(elResult)
+        elResult.innerHTML = `Всего введено ${numberData.count} чисел, из них ${numberData.positive} положительных, ${numberData.negative} отрицательных и ${numberData.zero} нулей`
+    }
+
+    function clearForm() {
+        document.getElementById('form-control').innerHTML = `<h3>Положительные отрицательные, нули</h3>`
+    }
+
+    document.getElementById('btnNext').onclick = function () {
+
+
+        let userNumber = parseFloat(document.getElementById('userNumber').value)
+        numberData.count++
+        if (userNumber > 0) numberData.positive++
+        if (userNumber < 0) numberData.negative++
+        if (userNumber === 0) numberData.zero++
+
+        if (numberData.count === 10) {
+            clearForm()
+            showResult()
+            numberData.count = 0
+        }
+
+    }
+
+
+</script>
+
+
+</body>
+</html>

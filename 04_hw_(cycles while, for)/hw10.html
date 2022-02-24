@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<main>
+    <h3 id="taskDescription"></h3>
+    <p id="question"></p>
+    <input type="button" value="да" id="btnYes" onclick="guessHigher()">
+    <input type="button" value="нет" id="btnNo" onclick="guessLower()">
+    <input type="button" value="это Ваше число?" id="btnSolved" onclick="guessEnd()">
+</main>
+<script>
+    let guessNum = {
+        low: 0,
+        high: 100,
+
+    }
+
+    let taskDescription = document.getElementById('taskDescription')
+    taskDescription.innerText = `загадайте число в пределах о ${guessNum.low} до ${guessNum.high} включительно`
+
+    let guessCurr = calcCurr()
+
+
+    let question = document.getElementById('question')
+    showQuestion()
+
+    function showQuestion() {
+        question.innerText = `Ваше число больше ${guessCurr}?`
+    }
+
+    function calcCurr() {
+        return (guessNum.high + guessNum.low) / 2
+    }
+
+    function guessLower() {
+
+        guessNum.high = guessCurr
+        guessCurr = Math.round(calcCurr())
+        showQuestion()
+
+    }
+
+    function guessHigher() {
+        guessNum.low = guessCurr
+        guessCurr = Math.round(calcCurr())
+        showQuestion()
+
+    }
+
+    function guessEnd() {
+        question.innerText = `Так ваше число и есть ${guessCurr}!`
+        document.getElementById('btnYes').style.display = 'none'
+        document.getElementById('btnNo').style.display = 'none'
+    }
+
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+<main>
+    <div id="form-control">
+        <h3>Сумма чисел в заданном диапазоне (включительно)</h3>
+
+        <label for="startNumber">Введите начало диапазона</label><br>
+        <input type="number" id="startNumber" value="0" onchange="calcResult()"><br>
+
+        <label for="endNumber">Введите конец </label><br>
+        <input type="number" id="endNumber" value="1" onchange="calcResult()"> <br>
+
+    </div>
+
+    <script>
+        /**
+         * [Math.ceil, округление вврех] {@link https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Math/ceil}
+         * [Math.floor, округление вниз] {@link https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Math/floor}
+         */
+        let elResult = document.createElement('div')
+        document.getElementById('form-control').appendChild(elResult)
+
+        function calcResult() {
+            let startNumber = parseFloat(document.getElementById('startNumber').value)
+            let endNumber = parseFloat(document.getElementById('endNumber').value)
+
+            let minNumber = startNumber
+            let maxNumber = endNumber
+
+            // если границы заданы от максмимального к миниммальному
+            if (startNumber > endNumber) {
+                minNumber = endNumber
+                maxNumber = startNumber
+            }
+
+            // границы диапазона, если заданы дробные числа
+            minNumber = Math.ceil(minNumber)
+            maxNumber = Math.floor(maxNumber)
+
+
+            // количество членов прогрессии
+            let n = maxNumber - minNumber + 1
+            /**
+             * Сумма всех членов арифметической прогрессии равна половине произведения суммы её крайних членов на количество всех её членов.
+             * @type {number}
+             */
+            let sum = (minNumber + maxNumber) * n / 2
+
+
+            elResult.innerHTML = `Сумма чисел в указанном диапазоне (крайние числа - включительно): ${sum}`
+
+        }
+
+
+    </script>
+
+
+</main>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<main>
+    <form id="form-control">
+        <h3>Наибольший общий делитель 2х чисел</h3>
+        <label for="firstNumber">Введите первое число</label>
+        <input type="number" id="firstNumber" value="0" onchange="calcResult()" min="-10000" max="10000">
+
+        <label for="secondNumber">Введите второе число</label>
+        <input type="number" id="secondNumber" value="0" onchange="calcResult()" min="-10000" max="10000">
+
+    </form>
+</main>
+
+
+<script>
+    let elResult = document.createElement('div')
+    document.getElementById('form-control').appendChild(elResult)
+
+    /**
+     * Алгоритм Евклида для нахождения НОД(A, B) выглядит следующим образом:
+     * Если A = 0, тогда НОД(A, B) = B, поскольку НОД(0, B) = B, и алгоритм останавливается.
+     * Если B = 0, тогда НОД(A, B) = A, поскольку GCD(A, 0) = A, и алгоритм останавливается.
+     * Делим A на B с остатком (A = B⋅Q + R)
+     * Находим НОД(B, R) при помощи алгоритма Евклида, поскольку НОД(A ,B) = НОД(B, R)
+     *
+     * @param num1
+     * @param num2
+     * @returns {*}
+     */
+    function calcGCD(num1, num2) {
+        num1 = Math.abs(num1)
+        num2 = Math.abs(num2)
+        while (1) {
+            num1 %= num2
+            if (!num1) return num2
+            num2 %= num1
+            if (!num2) return num1
+        }
+    }
+
+
+    function calcResult() {
+        if (document.getElementById('firstNumber').value !== '' && document.getElementById('firstNumber').value !== '') {
+
+            let firstNumber = parseInt(document.getElementById('firstNumber').value)
+            let secondNumber = parseInt(document.getElementById('secondNumber').value)
+
+            elResult.innerHTML = `НОД(${firstNumber}, ${secondNumber}) = `
+
+            if (firstNumber && secondNumber) {
+
+                elResult.innerHTML += `${calcGCD(firstNumber, secondNumber)}`
+
+            } else {
+                if (!firstNumber && secondNumber)
+                    elResult.innerHTML += `${Math.abs(secondNumber)}`
+                if (firstNumber && !secondNumber)
+                    elResult.innerHTML += `${Math.abs(firstNumber)}`
+                if (!firstNumber && !secondNumber)
+                    elResult.innerHTML += `infinity`
+            }
+        }
+    }
+
+
+</script>
+
+</body>
+</html>

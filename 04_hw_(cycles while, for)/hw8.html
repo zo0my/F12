@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<main>
+    <div id="formControl">
+        <h3>Дни недели</h3>
+        <p id="currDay">Понедельник</p>
+        <input type="button" id="nextDay" value="Следующий день">
+    </div>
+</main>
+
+<script>
+    let dayCount = 0
+
+    function showDay(day) {
+        document.getElementById('currDay').innerText = `${day}`
+    }
+
+    document.getElementById('nextDay').onclick = function () {
+        dayCount++
+        dayCount %= 7
+
+        switch (dayCount) {
+            case 0:
+                showDay('Понедельник')
+                break
+            case 1:
+                showDay('Вторник')
+                break
+            case 2:
+                showDay('Среда')
+                break
+            case 3:
+                showDay('Четверг')
+                break
+            case 4:
+                showDay('Пятница')
+                break
+            case 5:
+                showDay('Суббота')
+                break
+            case 6:
+                showDay('Воскресенье')
+                break
+        }
+
+    }
+
+
+</script>
+
+
+</body>
+</html>

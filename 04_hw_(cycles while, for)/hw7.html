@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<main>
+    <div id="formControl">
+        <h3>Сдвинуть число на 2 символа вправо</h3>
+        <label for="userNumber">Введите число </label>
+        <input type="number" id="userNumber" placeholder="не слишком дробное" onchange="distortNumber()">
+
+
+    </div>
+
+
+</main>
+
+<script>
+    let elResult = document.createElement('div')
+
+
+    function distortNumber() {
+        let userNumber = document.getElementById('userNumber').value
+        let negative = 1
+        if (parseFloat(userNumber) < 0)
+            negative = -1
+
+        userNumber *= negative
+        userNumber = String(userNumber)
+
+        userNumber = userNumber.slice(-2) + userNumber.slice(0, userNumber.length - 2)
+        userNumber *= negative
+
+
+        elResult.innerHTML = `${userNumber}`
+        document.getElementById('formControl').appendChild(elResult)
+
+    }
+
+
+</script>
+
+
+</body>
+</html>
