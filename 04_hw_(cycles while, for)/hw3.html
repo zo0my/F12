@@ -19,14 +19,16 @@
     let elResult = document.createElement('div')
     document.getElementById('form-control').appendChild(elResult)
 
-
+    /* нахождение, отображение делителей числа*/
     function calcResult() {
         let userNumber = parseInt(document.getElementById('userNumber').value)
         elResult.innerHTML = `Делители числа ${userNumber}: `
 
+        /*Если число делится нацело на i, добавить i в вывод делителей*/
         for (let i = 1; i <= Math.abs(userNumber); i++)
             if (userNumber % i === 0) elResult.innerHTML += `${i}, `
 
+        // убрать последнюю запятую в выводе
         elResult.innerHTML = elResult.innerHTML.slice(0, elResult.innerHTML.length - 1)
     }
 

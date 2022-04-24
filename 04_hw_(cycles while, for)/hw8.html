@@ -17,14 +17,18 @@
 <script>
     let dayCount = 0
 
+/** Отобразить входящую строку - день недели */
     function showDay(day) {
         document.getElementById('currDay').innerText = `${day}`
     }
 
+    /** Сменить текущий день недели на следующий при нажатии кнопки*/
     document.getElementById('nextDay').onclick = function () {
+        /** Переменная к-я ставит с номерами дней недели 0 = пн .. 6 = вс*/
         dayCount++
         dayCount %= 7
 
+        //соответствие (число - день недели)
         switch (dayCount) {
             case 0:
                 showDay('Понедельник')

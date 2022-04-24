@@ -8,54 +8,76 @@
 <main>
     <h3 id="taskDescription"></h3>
     <p id="question"></p>
-    <input type="button" value="да" id="btnYes" onclick="guessHigher()">
-    <input type="button" value="нет" id="btnNo" onclick="guessLower()">
-    <input type="button" value="это Ваше число?" id="btnSolved" onclick="guessEnd()">
+    <input type="button" value="да" id="btnYes" onclick="isNumber(1)">
+    <input type="button" value="нет" id="btnNo" onclick="isNumber(-1)">
+    <input type="button" value="это Ваше число?" id="btnSolved" onclick="isNumber(0)">
 </main>
 <script>
+    //диапазон длля поиска
     let guessNum = {
         low: 0,
         high: 100,
-
     }
+
+
 
     let taskDescription = document.getElementById('taskDescription')
-    taskDescription.innerText = `загадайте число в пределах о ${guessNum.low} до ${guessNum.high} включительно`
+    taskDescription.innerText = `загадайте число в пределах от ${guessNum.low} до ${guessNum.high} включительно`
 
-    let guessCurr = calcCurr()
+   let question = document.getElementById('question')
 
 
-    let question = document.getElementById('question')
-    showQuestion()
 
-    function showQuestion() {
+    function showQuestion(guessCurr) {
         question.innerText = `Ваше число больше ${guessCurr}?`
     }
+    showQuestion((guessNum.low + guessNum.high) /2)
+    console.log(guessNum)
 
-    function calcCurr() {
-        return (guessNum.high + guessNum.low) / 2
+    /*Поиск числа */
+    function isNumber (n) {
+        /**
+         * 1: число больше указанного, -1: число меньше указанного, 0: число равно указанного,
+         */
+        switch (n) {
+            case 1:
+                if ( guessNum.high - guessNum.low === 1)
+                    //если в диапазоне только 2 числа
+                    guessEnd(guessNum.high)
+                else {
+                    guessNum.low =Math.ceil((guessNum.low + guessNum.high) /2)
+                showQuestion((guessNum.low + guessNum.high) /2)
+                }
+
+                break
+            case -1:
+                if ( guessNum.high - guessNum.low === 1)
+                    //если в диапазоне только 2 числа
+                    guessEnd(guessNum.low)
+                else {
+                    guessNum.high =Math.floor((guessNum.low + guessNum.high) /2)
+                showQuestion((guessNum.low + guessNum.high) /2)
+                }
+                break
+            case 0:
+                guessEnd((guessNum.low + guessNum.high) /2)
+                break
+        }
+        //диапазон, внутри которого ищем число
+        console.log(guessNum)
     }
 
-    function guessLower() {
 
-        guessNum.high = guessCurr
-        guessCurr = Math.round(calcCurr())
-        showQuestion()
 
-    }
-
-    function guessHigher() {
-        guessNum.low = guessCurr
-        guessCurr = Math.round(calcCurr())
-        showQuestion()
-
-    }
-
-    function guessEnd() {
-        question.innerText = `Так ваше число и есть ${guessCurr}!`
+    //отобразить угаданное число
+    function guessEnd(guessCurr) {
+        question.innerText = `Так ваше число = ${guessCurr}!`
+        document.getElementById('btnSolved').value = 'это Ваше число.'
+        document.getElementById('btnSolved').disabled  = true
         document.getElementById('btnYes').style.display = 'none'
         document.getElementById('btnNo').style.display = 'none'
     }
+
 
 
 </script>

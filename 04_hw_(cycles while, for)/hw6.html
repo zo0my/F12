@@ -17,6 +17,8 @@
     </form>
     <script>
         let calcBody = document.getElementById('calcBody')
+
+        /* Первое число для калькулятора*/
         let elNumber1 = document.createElement('input')
         elNumber1.type = 'number'
         elNumber1.required = true
@@ -25,6 +27,7 @@
             elBtnCalc.disabled = !isCalc()
         }
 
+        /* Второе число для калькулятора*/
         let elNumber2 = document.createElement('input')
         elNumber2.type = 'number'
         elNumber2.required = true
@@ -33,6 +36,7 @@
             elBtnCalc.disabled = !isCalc()
         }
 
+        /*Знак мат действия*/
         let elOperand = document.createElement('input')
         elOperand.type = 'text'
         elOperand.required = true
@@ -43,7 +47,7 @@
             elBtnCalc.disabled = !isCalc()
         }
 
-
+        /*Кнопка, для подтверждения*/
         let elBtnCalc = document.createElement('input')
         elBtnCalc.type = 'button'
         elBtnCalc.value = 'Посчитать'
@@ -54,12 +58,14 @@
             renderQuestion()
         }
 
+        /*Пустое поле результата*/
         let elResult = document.createElement('div')
 
 
         let elQuestion = document.createElement('div')
         elQuestion.innerText = `Повторить?`
 
+        /*Кнопка перезапуска калькулятора*/
         let elBtnRestart = document.createElement('input')
         elBtnRestart.type = 'button'
         elBtnRestart.value = `Да`
@@ -68,6 +74,7 @@
             renderInput()
         }
 
+        /*Кнопка выхода из калькулятора*/
         let elBtnQuit = document.createElement('input')
         elBtnQuit.type = 'button'
         elBtnQuit.value = `Нет`
@@ -76,11 +83,12 @@
             calcBody.innerHTML = "OK"
         }
 
-
+        /*Заполнены ли поля ввода*/
         function isCalc() {
             return elNumber1.value !== '' && elNumber2.value !== '' && elOperand.value !== ''
         }
 
+        /*Отобразить поля ввода для подсчета*/
         function renderInput() {
             calcBody.appendChild(elNumber1)
             calcBody.appendChild(elNumber2)
@@ -90,11 +98,12 @@
 
         }
 
+        /*Скрыть содержимое калькулятора*/
         function clearBody() {
             calcBody.innerHTML = ''
         }
 
-
+        /*Отобразить результат подсчета*/
         function renderQuestion() {
             calcBody.appendChild(elResult)
             calcBody.appendChild(elQuestion)
@@ -104,6 +113,7 @@
 
         }
 
+        /*Посчитать и отобразить результат*/
         function calcResult() {
             elResult.innerHTML = `Результат: ${elNumber1.value} ${elOperand.value} ${elNumber2.value} = `
             switch (elOperand.value) {
@@ -126,7 +136,7 @@
 
         }
 
-
+        /*Отобразить начало подсчета*/
         renderInput()
 
 

@@ -16,6 +16,7 @@
 
 </main>
 <script>
+    /*К-во введенных чисел, в тч <0, >0, ===0*/
     let numberData = {
         count: 0,
         negative: 0,
@@ -23,16 +24,20 @@
         zero: 0
     }
 
+    //отобразить результат подсчета
     function showResult() {
         let elResult = document.createElement('div')
         document.getElementById('form-control').appendChild(elResult)
         elResult.innerHTML = `Всего введено ${numberData.count} чисел, из них ${numberData.positive} положительных, ${numberData.negative} отрицательных и ${numberData.zero} нулей`
     }
 
+    /*Убрать поле ввода*/
     function clearForm() {
-        document.getElementById('form-control').innerHTML = `<h3>Положительные отрицательные, нули</h3>`
+        document.getElementById('form-control').innerHTML = `<h3>Положительные, отрицательные, нули</h3>`
     }
 
+    /*Посчитать введенное число как <0, >0 или ===0
+    * после ввода 10 чисел отобразить результат*/
     document.getElementById('btnNext').onclick = function () {
 
 
@@ -41,6 +46,7 @@
         if (userNumber > 0) numberData.positive++
         if (userNumber < 0) numberData.negative++
         if (userNumber === 0) numberData.zero++
+
 
         if (numberData.count === 10) {
             clearForm()

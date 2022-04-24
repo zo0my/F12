@@ -30,27 +30,17 @@
             let startNumber = parseFloat(document.getElementById('startNumber').value)
             let endNumber = parseFloat(document.getElementById('endNumber').value)
 
-            let minNumber = startNumber
-            let maxNumber = endNumber
-
-            // если границы заданы от максмимального к миниммальному
-            if (startNumber > endNumber) {
-                minNumber = endNumber
-                maxNumber = startNumber
-            }
-
             // границы диапазона, если заданы дробные числа
-            minNumber = Math.ceil(minNumber)
-            maxNumber = Math.floor(maxNumber)
-
+            startNumber = Math.ceil(startNumber)
+            endNumber = Math.floor(endNumber)
 
             // количество членов прогрессии
-            let n = maxNumber - minNumber + 1
+            let n = Math.abs(startNumber - endNumber) + 1
             /**
              * Сумма всех членов арифметической прогрессии равна половине произведения суммы её крайних членов на количество всех её членов.
              * @type {number}
              */
-            let sum = (minNumber + maxNumber) * n / 2
+            let sum = (startNumber + endNumber) * n / 2
 
 
             elResult.innerHTML = `Сумма чисел в указанном диапазоне (крайние числа - включительно): ${sum}`

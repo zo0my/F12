@@ -20,20 +20,24 @@
 <script>
     let elResult = document.createElement('div')
 
-
+    /** При изменении ввода сдвинуть число на 2 цифры вправо 123456789 = 891234567  и отобразить*/
     function distortNumber() {
         let userNumber = document.getElementById('userNumber').value
+        /* Хранит знак введенного числа, чтобы после сдвига знак оставить впереди*/
         let negative = 1
         if (parseFloat(userNumber) < 0)
             negative = -1
 
+        // Приведение к положительному значению
         userNumber *= negative
         userNumber = String(userNumber)
 
+        // строковый сдвиг на 2 цифры
         userNumber = userNumber.slice(-2) + userNumber.slice(0, userNumber.length - 2)
+        // Восстановление исходного знака
         userNumber *= negative
 
-
+        // отображение результата
         elResult.innerHTML = `${userNumber}`
         document.getElementById('formControl').appendChild(elResult)
 

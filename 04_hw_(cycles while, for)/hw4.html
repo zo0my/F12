@@ -20,15 +20,18 @@
     let elResult = document.createElement('div')
     document.getElementById('form-control').appendChild(elResult)
 
+    /*Подсчет, отображение цифр в числе*/
     function calcResult() {
         let userNumber = document.getElementById('userNumber').value
         let digits = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
         let digitCount = 0
 
+        /*если символ введенного числа === цифра, увеличить счетчик*/
         for (let i = 0; i < userNumber.length; i++)
             for (let j = 0; j < digits.length; j++)
                 if (userNumber[i] === digits[j]) digitCount++
 
+        //отобразить результат
         elResult.innerHTML = `количество цифр во введенном числе: ${digitCount}`
 
     }

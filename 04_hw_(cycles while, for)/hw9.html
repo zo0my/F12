@@ -16,15 +16,21 @@
     multTable.style.display = 'flex'
     multTable.style.listStyleType = "none"
 
-
-    //хмммм, так не очень удобно
     for (let i = 2; i < 10; i++) {
-        multTable.appendChild(document.createElement('li')).id = `multNum${i}`
-        document.getElementById(`multNum${i}`).appendChild(document.createElement('ul')).id = `multNumHere${i}`
+        let li = document.createElement('li')
+        let ul = document.createElement('ul')
+
+        // ячейка, со списком для таблицы умножения i-го числа
+        multTable.appendChild(li)
+        //список для таблицы умножения i-го числа
+        li.appendChild(ul)
 
         for (let j = 1; j < 11; j++) {
-            document.getElementById(`multNumHere${i}`).appendChild(document.createElement('li')).id = `el${i}${j}`
-            document.getElementById(`el${i}${j}`).innerText += i * j
+            let li = document.createElement('li')
+            //ячейка для результата умножения i-го числа на j-е
+            ul.appendChild(li)
+            /*Поместить результат умножения в ячейку*/
+            li.innerText = `${i * j}`
 
         }
     }
