@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        div {
+            display: flex;
+            gap: 20px;
+        }
+    </style>
+</head>
+<body>
+<main id="start">
+    <ul id="lstUser"></ul>
+
+    <div>
+    <input type="text" id = "userInfo" name = "userInfo" placeholder="Введите тип телефона">
+    <input type="text" id = "userPhone" name = "userPhone" placeholder="Введите номер телефона">
+    <button id="add">+</button>
+    </div>
+</main>
+
+
+
+<script>
+    //массив, в к-м содержатся данные пользователя
+    let arrUser = []
+
+    document.getElementById('add').onclick = () => {
+        document.getElementById('lstUser').innerHTML = ''
+
+        let userPhone = document.getElementById('userPhone').value
+        let userInfo = document.getElementById('userInfo').value
+
+        //если поля не пусты добавить в массив ввденные данные
+        if ( userPhone !== '' &&  userInfo !== '' ) {
+            arrUser[`${userInfo}`] = userPhone
+            console.log(arrUser)
+
+        }
+
+        //проход по ключам массива, вывод ключа и элемента массива
+        for (const key in arrUser) {
+            let li = document.createElement('li')
+            document.getElementById('lstUser').appendChild(li)
+            li.innerText= `${key}: ${arrUser[`${key}`]}`
+        }
+}
+
+</script>
+
+
+
+
+</body>
+</html>
