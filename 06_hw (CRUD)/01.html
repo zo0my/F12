@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    #lstUser span {
+        padding: .5ch;
+    }
+    ul {
+        list-style-type: none;
+    }
+</style>
+
+<body id = "hi">
+<main id="start">
+    <ul id="lstUser"></ul>
+
+    <ul>
+        <li>
+            <input type="text" id = "userPhoneKey" name = "userPhoneKey" placeholder="Введите имя телефона">
+            <input type="text" id = "userPhoneNumber" name = "userPhoneNumber" placeholder="Введите номер телефона">
+            <button id="btnAdd">+</button>
+            <button id="btnReset">reset</button>
+        </li>
+        <li>
+            <input type="text" id = "userSearch">
+            <button id="btnSearch">search</button>
+        </li>
+        <li id = "searchResult"></li>
+
+    </ul>
+</main>
+
+
+
+
+
+<script>
+    //объект, в к-м содержатся данные пользователя
+    let objUser = new Object()
+    // поле ввода ключа объекта
+    let userKey = document.getElementById('userPhoneKey')
+    // поле элемента объекта
+    let userNumber = document.getElementById('userPhoneNumber')
+
+    // добавить элемент в объект и отобразить список
+    document.getElementById('btnAdd').onclick = () => {
+        // если поля заполнены
+        if (userKey.value !== '' && userNumber.value !== '') {
+            objUser[userKey.value] = userNumber.value
+            renderPhoneList()
+            resetInput()
+        }
+    }
+
+    // сбросить поля ввода
+    document.getElementById('btnReset').onclick = () => {
+        resetInput()
+    }
+
+    // очистить поля ввода
+    function  resetInput() {
+        userKey.value = ''
+        userNumber.value = ''
+    }
+
+    // построить список из объекта
+    function renderPhoneList() {
+        // очистить содержимое перед повторным выводом
+        document.getElementById('lstUser').innerHTML = ''
+
+        for (let key in objUser) {
+            // строка "ключ: элемент"
+            let li = document.createElement('li')
+
+            // отображаемый ключ объекта
+            let spanKey = document.createElement('span')
+            spanKey.style.cursor = `pointer`
+            spanKey.innerHTML = `${key}: `
+
+            // отображаемый элемент объекта
+            let spanNumber = document.createElement('span')
+            spanNumber.style.cursor = `pointer`
+            spanNumber.innerHTML = objUser[key]
+
+            //кнопка удаления строки
+            let btnDel = document.createElement('button')
+            btnDel.innerHTML = '-'
+
+            // удалить элемент при нажатиии кнопки
+            btnDel.onclick = () => {
+                delete objUser[key]
+                renderPhoneList()
+            }
+
+            // редактирование по даблклику на ключ
+            spanKey.ondblclick = () => {
+                userKey.focus()
+                updElem()
+            }
+
+            // редактирование по даблклику на элемент
+            spanNumber.ondblclick =  () => {
+                userNumber.focus()
+                updElem()
+            }
+
+            // переместить в поле добавления элемента редактируемые данные
+            function updElem() {
+                userKey.value = key
+                userNumber.value = objUser[key]
+                delete objUser[key]
+                renderPhoneList()
+                }
+
+            // поместить строка > ключ + элемент + кнопка удалить строку
+            document.getElementById('lstUser').appendChild(li)
+            li.appendChild(spanKey)
+            li.appendChild(spanNumber)
+            li.appendChild(btnDel)
+        }
+
+    }
+
+    // при нажатии вывести результат поиска
+    document.getElementById("btnSearch").onclick = () => {
+        //input, поле поиска по ключу и содержимому
+        let userSearch = document.getElementById('userSearch')
+        //li, поле вывода результата поиска
+        let searchResult = document.getElementById('searchResult')
+
+        //если в поиковой строке ничего не введено, выйти
+        if (userSearch.value === '') {
+            searchResult.innerHTML = 'Пустое поле поиска '
+            return
+        }
+
+        searchResult.innerHTML = 'Найдены телефоны: '
+        //собственно поиск и вывод при совпадении
+        for (let key in objUser) {
+        if (objUser[key].includes(userSearch.value) || key.includes(userSearch.value)) {
+            searchResult.innerHTML += `${key}: ${objUser[key]}, `
+        }
+        }
+        //убрать последнюю запяутю в выводе, или оборазить неудачу при поиске
+        searchResult.innerHTML = (searchResult.innerHTML === 'Найдены телефоны: ') ? `Ничего не найдено` :
+            searchResult.innerHTML.slice(0, searchResult.innerHTML.length - 2)
+
+    }
+
+</script>
+</body>
+</html>
